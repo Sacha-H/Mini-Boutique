@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}IndexCart{% endblock %}
+
+{% block body %}
+<h1>panier</h1>
+{% if items | length > 0 %}
+    <table class="table">
+        <thead>
+            <tr>
+                <th>produit</th>
+                <th>prix</th>
+                <th>quantité</th>
+                <th>stock</th>
+                <th>stock restant</th>
+                <th>total</th>
+                <th>suprimer</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for item in items %}
+            <tr>
+                <td>{{ item.product.nameProduct}}</td>
+                <td>{{ item.product.priceProduct}}</td>
+                <td>{{ item.quantity}}</td>
+                <td>{{ item.product.stockProduct}}</td>
+                <td>{{ item.product.stockProduct -  item.quantity}} </td>
+                <td>{{ item.product.priceProduct * item.quantity}}</td>
+                <td>
+                    <a href="{{ path('cart_remove', {'id': item.product.id}) }}" class="btn btn-danger btn-sm">
+                    supprimer
+                    </a>
+            
+        {% endfor %}
+        </tbody>
+        <tfoot>
+            <tr>
+         
+                <td colspan="5"> total : <td>                
+                 {{ total }}                 
+                <td> 
+
+ 
+ 
+ 
+ 
+    </table>
+    {% else %}
+        <p>Vorte Panier est vide !</p>
+    {% endif %}
+    {% endblock %}
+

@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Product index{% endblock %}
+
+{% block body %}
+    <h1>Product index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>NameProduct</th>
+                <th>image</th>
+                <th>DescriptionProduct</th>
+                <th>PriceProduct</th>
+                <th>StockProduct</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for product in products %}
+            <tr>
+                <td>{{ product.id }}</td>
+                 <td><img src="{{ asset('uploads/images/' ~ product.imageProduct) }}" width="100"></td>
+                <td>{{ product.nameProduct }}</td>
+                <td>{{ product.descriptionProduct }}</td>
+                <td>{{ product.priceProduct }}</td>
+                <td>{{ product.stockProduct }}</td>
+                <td>
+                    <a href="{{ path('product_show', {'id': product.id}) }}">show</a>
+                    <a href="{{ path('product_edit', {'id': product.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('product_new') }}">Create new</a>
+
+
+    <div>
+    {% for product in products %}
+    <h3>{{ product.nameProduct }}</h3>
+    <h3><img src="{{ asset('uploads/images/' ~ product.imageProduct) }}" width="100"><h3>
+    <h3>{{ product.descriptionProduct }}</h3>
+    <h3>{{ product.priceProduct }}</h3>
+    <h3>{{ product.stockProduct }}</h3>
+    <a href="{{path('cart_add', {'id':product.id}) }}">ajouter au panier</a>
+    {% endfor %}
+{% endblock %}

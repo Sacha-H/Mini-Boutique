@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %} 
+
+{% block title %}Player index{% endblock %}
+
+{% block body %}
+    <h1>Player index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>PseudoPlayer</th>
+                <th>FirstNamePlayer</th>
+                <th>LastNamePlayer</th>
+                <th>DatePlayer</th>
+                <th>DescriptionPlayer</th>
+                <th>RolePlayer</th>
+                <th>imagePlayer</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for player in players %}
+            <tr>
+                <td>{{ player.id }}</td>
+                <td>{{ player.pseudoPlayer }}</td>
+                <td>{{ player.firstNamePlayer }}</td>
+                <td>{{ player.lastNamePlayer }}</td>
+                <td>{{ player.datePlayer ? player.datePlayer|date('Y-m-d') : '' }}</td>
+                <td><img src="{{ asset('uploads/images/' ~ player.imagePlayer) }}" width="100"></td>
+                <td>{{ player.descriptionPlayer }}</td>
+                <td>{{ player.rolePlayer }}</td>
+                <td>
+                    <a href="{{ path('player_show', {'id': player.id}) }}">show</a>
+                    <a href="{{ path('player_edit', {'id': player.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="8">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('player_new') }}">Create new</a>
+{% endblock %}
