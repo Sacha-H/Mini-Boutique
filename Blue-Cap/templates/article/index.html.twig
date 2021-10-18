@@ -12,6 +12,7 @@
                 <th>TitleArticle</th>
                 <th>DescriptionArticle</th>
                 <th>DateArticle</th>
+                <th>image</th>
                 <th>actions</th>
             </tr>
         </thead>
@@ -22,6 +23,7 @@
                 <td>{{ article.titleArticle }}</td>
                 <td>{{ article.descriptionArticle }}</td>
                 <td>{{ article.dateArticle ? article.dateArticle|date('Y-m-d') : '' }}</td>
+                 <td><img src="{{ asset('uploads/images/' ~ article.imageArticle) }}" width="100"></td>
                 <td>
                     <a href="{{ path('article_show', {'id': article.id}) }}">show</a>
                     <a href="{{ path('article_edit', {'id': article.id}) }}">edit</a>

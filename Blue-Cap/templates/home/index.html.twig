@@ -1,14 +1,115 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello HomeController!{% endblock %}
+{% block title %}Hello HomeController!
+{% endblock %}
 
 {% block body %}
 
 
-<body>
-<video autoplay muted loop>
+	
+		<section class='intro'>
+			<video autoplay muted loop>
 				<source src="{{ asset('video/videointro.mp4')}}" type="video/mp4">
 			</video>
-    <h1>Blue Cap Gaming</h1>
-            </body>
-{% endblock %}
+			<h1>Blue Cap Gaming</h1>
+		</section>
+		<section class="news container-fluid">
+			<h2>Les News</h2>
+                        <section class="row">
+                                <article class="col-md-6">
+                                        <h3>Les Dernières News</h3>
+
+                                        
+
+                                        
+                                                <div class="lastNews row">
+
+                                                {% for article in articlesByDate %}
+                                                        <a class="haArticle" href="{{ path('article_show', {'id': article.id}) }}">
+                                                                <div class="col-md-6">
+                                                                        <h4>{{ article.titleArticle }}</h4>
+                                                                        <img src="{{ asset('uploads/images/' ~ article.imageArticle) }}" width="150">
+                                                                        {# <p class"auteur">ecrit par : {{ article.user.pseudo }}</p> #}
+                                                                        <p>{{ article.dateArticle ? article.dateArticle|date('d-m-Y') : '' }}</p>
+                                                                
+                                                                </div>
+                                                        </a>
+                                                {% endfor %}
+                                                </div>
+                                        
+
+                                </article>
+                                <article class="col-md-6">
+                                        <h3>Les Meilleurs News</h3>
+                                        <div class="bestNews row">
+                                                <div class="col-md-4">
+                                                </div>
+                                        </div>
+                                </article>
+                        </section>
+                </section>
+                <section class="matchs container-fluid">
+			<h2>Les Matchs</h2>
+                        <section class="row">
+                                <article class="col-md-6">
+                                        <h3>Les Derniers Résultats</h3>
+                                        <div class="lastResult row">
+                                                <div class="col-md-4">
+                                        </div>
+                                </div>
+                                </article>
+                                <article class="col-md-6">
+                                        <h3>Les Prochains Matchs</h3>
+                                        <div class="nextMatchs row">
+                                                <div class="col-md-4">
+                                                </div>
+                                        </div>
+                                </article>
+                        </section>
+                </section>
+                <section class="teams">
+                        <h2>Les équipes</h2>
+
+                        {% for game in game %}
+			<div class='col-md-12 affichage-jeux'>
+				<h5>
+					<a href="{{ path('game_show', {'id': game.id}) }}">
+						{{ game.nameGame }}
+
+
+						<img src="{{ asset('uploads/images/' ~ game.imageGame) }}" width="200">
+					</a>
+				</h5>
+			</div>
+			<section class="equipe row">
+
+
+				{% for player in player %}
+					{% if player.game.id == game.id %}
+						<div class='col-md-3 affichage-equipe'>
+							<h6>
+								<a href="{{ path('player_show', {'id': player.id}) }}">
+                                                                <img src="{{ asset('uploads/images/' ~ player.imagePlayer) }}" height="100">
+									{{ player.pseudoPlayer }}
+
+
+								</a>
+							</h6>
+						</div>
+					{% endif %}
+				{% endfor %}
+				</section>
+			{% endfor %}
+                </section>
+
+                        
+
+                
+
+        
+
+
+
+
+
+			{% endblock %}

@@ -36,6 +36,16 @@ class ArticleRepository extends ServiceEntityRepository
     }
     */
 
+    public function findByDate()
+    {
+        return $this->createQueryBuilder('a')
+            ->orderBy('a.dateArticle', 'DESC')
+            ->setMaxResults(2)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
     /*
     public function findOneBySomeField($value): ?Article
     {
